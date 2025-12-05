@@ -51,10 +51,10 @@ impl<const DIM: usize, T> VectorDatabase<DIM, T> {
             let distance = initial_point.euclidian_distance(vector);
 
             /* Use binary search in the result to find where we should insert the new point, based on the distance */
-            match results.binary_search_by(|(d, _)| d.total_cmp(&distance)) {
+            match results.binary_search_by(|(d, _)| distance.total_cmp(d)) {
                 Ok(index) | Err(index) => {
-                    /* If the result vec is not yet full, we can simply insert at the given index */
                     if results.len() < max_results {
+                        /* If the result vec is not yet full, we can simply insert at the given index */
                         results.insert(index, (distance, data_point));
                     } else {
                         /* The index returned by the binary search is not the vec end, so we have a new best candidate */
