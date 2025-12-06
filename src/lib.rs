@@ -1,21 +1,6 @@
-#[derive(Debug, Clone, PartialEq)]
-pub struct Vector<const DIM: usize> {
-    data: [f32; DIM],
-}
+mod vector;
 
-impl<const DIM: usize> Vector<DIM> {
-    pub fn new(data: [f32; DIM]) -> Self {
-        Self { data }
-    }
-
-    fn euclidian_distance(&self, other: &Self) -> f32 {
-        self.data
-            .iter()
-            .zip(other.data.iter())
-            .map(|(a, b)| a * b)
-            .sum()
-    }
-}
+pub use vector::Vector;
 
 /// In memory vector database.
 ///
@@ -78,9 +63,6 @@ impl<const DIM: usize, T> VectorDatabase<DIM, T> {
             }
         }
 
-        results
-            .into_iter()
-            .map(|distanced| distanced.data)
-            .collect()
+        results.into_iter().map(|distanced| distanced.data).collect()
     }
 }
