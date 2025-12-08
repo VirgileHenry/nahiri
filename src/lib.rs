@@ -16,10 +16,10 @@ pub struct VectorDatabase<const DIM: usize, T> {
 }
 
 impl<const DIM: usize, T: Clone> VectorDatabase<DIM, T> {
-    pub fn new(data_points: &[([f32; DIM], T)]) -> Self {
+    pub fn new(data_points: &[(Vector<DIM>, T)]) -> Self {
         let data_points = data_points
             .iter()
-            .map(|(vector_data, data_point)| (Vector::new(vector_data.clone()), data_point.clone()))
+            .map(|(vector, data_point)| (vector.clone(), data_point.clone()))
             .collect();
         Self { data_points }
     }
