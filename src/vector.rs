@@ -8,7 +8,7 @@ impl<const DIM: usize> Vector<DIM> {
         Self { data }
     }
 
-    pub fn euclidian_distance(&self, other: &Self) -> f32 {
+    pub fn euclidian_distance_sq(&self, other: &Self) -> f32 {
         self.data.iter().zip(other.data.iter()).map(|(a, b)| a * b).sum()
     }
 }
